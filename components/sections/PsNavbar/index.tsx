@@ -9,8 +9,8 @@ import { useStyleState } from '@/styles/context';
 
 import { LayoutProps } from '@/hooks/useDeviceSize';
 
-import PsBurguerIcon from './PsBurguerIcon';
-import PsNavbarItem from './PsNavbarItem';
+import PsBurguerIcon from './dedicated/PsBurguerIcon';
+import PsNavbarItem from './dedicated/PsNavbarItem';
 import PsButton from '@/components/molecules/PsButton';
 
 import logo from '@/images/logo.png';
@@ -21,7 +21,7 @@ const { firstBg } = theme;
 const Navbar = styled.nav`
   ${firstBg};
   width: 100%;
-  height: '81px'};
+  height: '81px';
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -39,6 +39,8 @@ const MobileNavMenu = styled.ul`
   position: absolute;
   width: 100%;
   justify-content: center;
+  z-index: 2;
+  top: 80px;
 `;
 
 const ToggleContainer = styled.div`
@@ -102,7 +104,7 @@ const PsNavBar = () => {
       {
         opacity: 1,
         display: 'flex',
-        height: '60vh',
+        height: '100vw',
       }
     );
     tl.fromTo(
@@ -116,7 +118,6 @@ const PsNavBar = () => {
         opacity: 1,
         display: 'flex',
         x: 0,
-        stagger: 0.1,
       }
     );
     return () => {

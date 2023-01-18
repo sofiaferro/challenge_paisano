@@ -4,7 +4,7 @@ import { gsap } from 'gsap';
 import styled from 'styled-components';
 
 import Link from 'next/link';
-
+import { theme } from '@/styles/theme';
 import texts from '@/styles/texts';
 
 interface ItemProps {
@@ -19,6 +19,7 @@ interface PsNavbarItemProps {
 
 // styles
 const { li } = texts;
+const { thirdText } = theme;
 
 const ItemContainer = styled.div`
   padding-left: 1em;
@@ -52,11 +53,10 @@ const PsNavbarItem = ({ item, onClick }: PsNavbarItemProps) => {
     tl.fromTo(
       textRef.current,
       {
-        position: 'relative',
         top: 0,
-        textShadow: 'none',
       },
       {
+        ...thirdText,
         top: -5,
         duration: 0.3,
       }

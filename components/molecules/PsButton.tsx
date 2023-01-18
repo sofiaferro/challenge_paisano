@@ -9,6 +9,8 @@ import { theme } from '@/styles/theme';
 interface PsButtonProps {
   title: string;
   onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
+  containerStyle?: object;
+  buttonStyle?: object;
 }
 
 // styles
@@ -18,13 +20,28 @@ const { secondaryButton } = theme;
 const Button = styled.div`
   ${button};
   ${secondaryButton};
-  border-radius: 15px;
+  border-radius: 2em;
   border-style: solid;
   border-width: 2px;
-  padding: 0.5em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  text-align: center;
 `;
 
-const PsButton = ({ title, onClick }: PsButtonProps) => {
+const ButtonContainer = styled.div`
+  padding: 0.2em;
+  width: calc(10px + 15vw);
+  @media (max-width: 680px) {
+    width: 100%;
+  }
+`;
+
+const PsButton = ({
+  title,
+  onClick,
+  containerStyle,
+  buttonStyle,
+}: PsButtonProps) => {
   // refs
   const buttonRef = useRef(null);
 
@@ -34,8 +51,9 @@ const PsButton = ({ title, onClick }: PsButtonProps) => {
 
   useEffect(() => {
     tl.to(buttonRef?.current, {
-      scaleX: 1.1,
-      scaleY: 1.1,
+      scaleX: 1.05,
+      scaleY: 1.05,
+      duration: 0.1,
     });
     return () => {
       tl.kill;
@@ -58,14 +76,17 @@ const PsButton = ({ title, onClick }: PsButtonProps) => {
   };
 
   return (
-    <Button
-      onClick={(e: React.MouseEvent<HTMLDivElement>) => handleOnClick(e)}
-      ref={buttonRef}
-      onMouseEnter={handleOnMouseEnter}
-      onMouseLeave={handleOnMouseLeave}
-    >
-      {title}
-    </Button>
+    <ButtonContainer style={{ ...containerStyle }}>
+      <Button
+        style={{ ...buttonStyle }}
+        onClick={(e: React.MouseEvent<HTMLDivElement>) => handleOnClick(e)}
+        ref={buttonRef}
+        onMouseEnter={handleOnMouseEnter}
+        onMouseLeave={handleOnMouseLeave}
+      >
+        <p>{title}</p>
+      </Button>
+    </ButtonContainer>
   );
 };
 

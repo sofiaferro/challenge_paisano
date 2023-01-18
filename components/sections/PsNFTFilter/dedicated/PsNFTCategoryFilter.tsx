@@ -6,64 +6,54 @@ import styled from 'styled-components';
 import texts from '@/styles/texts';
 import { theme } from '@/styles/theme';
 
-import Image from 'next/image';
-
-import iconSearchBar from '@/images/icon-search-bar.svg';
-
-interface PsSearchBarProps {
-  placeholder: string;
+interface PsNFTCategoryFilterProps {
+  title: string;
   onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
   style?: object;
+  isActive: boolean;
 }
 
 // styles
 const { button } = texts;
-const { secondaryButton, thirdText } = theme;
+const { fourthText, thirdButton, firstBg, thirdText } = theme;
 
-const SearchBar = styled.div`
+const Button = styled.div`
   ${button};
-  ${secondaryButton};
-  border-radius: 1em;
+  ${thirdButton};
+  border-radius: 2em;
   border-style: solid;
   border-width: 2px;
-  padding: 1em;
-  text-align: left;
-  width: 100%;
-  display: flex;
-  height: 52px;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  text-align: center;
 `;
 
-const SearchBarContainer = styled.div`
-  padding-bottom: 2em;
-  display: flex;
+const ButtonContainer = styled.div`
+  padding: 0.2em;
   width: 100%;
 `;
 
-const CustomInput = styled.input`
-  ${button};
-  background-color: transparent;
-  border-style: none;
-  width: 100%;
-  outline: none;
-  &:focus::placeholder {
-    color: transparent;
-  }
+const Text = styled.p`
+  ${fourthText};
 `;
 
-const PsSearchBar = ({ placeholder, onClick, style }: PsSearchBarProps) => {
+const PsNFTCategoryFilter = ({
+  title,
+  onClick,
+  style,
+  isActive,
+}: PsNFTCategoryFilterProps) => {
   // refs
-  const textRef = useRef(null);
+  const buttonRef = useRef(null);
 
   // animations
   gsap.defaults({ overwrite: 'auto' });
   const tl = gsap.timeline({ paused: true, reversed: true });
 
   useEffect(() => {
-    tl.to(textRef.current, {
-      ...thirdText,
+    tl.to(buttonRef?.current, {
+      scaleX: 1.05,
+      scaleY: 1.05,
       duration: 0.1,
     });
     return () => {
@@ -87,18 +77,26 @@ const PsSearchBar = ({ placeholder, onClick, style }: PsSearchBarProps) => {
   };
 
   return (
-    <SearchBarContainer>
-      <SearchBar
+    <ButtonContainer>
+      <Button
         onClick={(e: React.MouseEvent<HTMLDivElement>) => handleOnClick(e)}
+        ref={buttonRef}
         onMouseEnter={handleOnMouseEnter}
         onMouseLeave={handleOnMouseLeave}
-        style={{ ...style }}
+        style={{
+          ...style,
+          backgroundColor: isActive
+            ? thirdButton.backgroundColor
+            : firstBg.backgroundColor,
+          borderStyle: isActive ? button.color : 'none',
+        }}
       >
-        <CustomInput ref={textRef} placeholder={placeholder} />
-        <Image src={iconSearchBar} alt={'Icon search bar'} />
-      </SearchBar>
-    </SearchBarContainer>
+        <Text style={{ color: isActive ? fourthText.color : thirdText.color }}>
+          {title}
+        </Text>
+      </Button>
+    </ButtonContainer>
   );
 };
 
-export default PsSearchBar;
+export default PsNFTCategoryFilter;

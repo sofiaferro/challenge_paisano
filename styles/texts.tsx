@@ -1,10 +1,10 @@
 import { theme } from './theme';
 
-const { text, title } = theme;
+const { primaryText, secondaryText, thirdText } = theme;
 
 const texts = {
   h1: {
-    ...title,
+    ...primaryText,
     fontFamily: 'DM Sans',
     fontWeight: '600',
     fontSize: '2em',
@@ -22,24 +22,31 @@ const texts = {
     textDecoration: 'none',
   },
   p: {
-    ...text,
+    ...secondaryText,
     fontFamily: 'DM Sans',
     fontWeight: '700',
     fontSize: 'calc(10px + 1vw)',
   },
   li: {
-    ...text,
+    ...secondaryText,
     fontFamily: 'DM Sans',
     fontWeight: '500',
     textDecoration: 'none',
     fontSize: 'calc(10px + 4vw)',
   },
   button: {
-    ...title,
+    ...primaryText,
     fontFamily: 'DM Sans',
     fontWeight: 500,
     fontSize: '14px',
     lineHeight: '16px',
+  },
+  caption: {
+    ...thirdText,
+    fontFamily: 'Poppins',
+    fontStyle: 'normal',
+    fontWeight: 400,
+    fontSize: '12px',
   },
 };
 

@@ -13,25 +13,31 @@ interface PsHeroProps {
 
 // styles
 const { h1, p } = texts;
-const { firstBg } = theme;
+const { firstBg, thirdText } = theme;
 
 const Container = styled.div`
   ${firstBg};
   width: 100%;
-  height: 40vh;
+  height: 40vw;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 2em;
   justify-content: center;
+  @media (max-width: 680px) {
+    height: 25vh;
+  }
 `;
 
 const Title = styled.h1`
   ${h1};
   padding: 0.5em;
+  text-align: center;
 `;
 
 const Text = styled.p`
   ${p};
+  ${thirdText};
   text-transform: uppercase;
   font-size: 12px;
   @media (max-width: 680px) {
@@ -42,8 +48,8 @@ const Text = styled.p`
 const PsHero = ({ action }: PsHeroProps) => {
   // data
   const data = {
-    title: 'The new creative economy.',
-    text: 'Create, explore, & SELL digital art NFTs.',
+    text: 'The new creative economy.',
+    title: 'Create, explore, & SELL digital art NFTs.',
   };
   return (
     <Container>
