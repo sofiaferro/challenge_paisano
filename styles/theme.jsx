@@ -19,7 +19,8 @@ const theme = {
   fourthText: { color: colorPalette.secondaryBackground },
   button: { backgroundColor: colorPalette.primaryButton },
   secondaryButton: { borderColor: colorPalette.thirdText },
-  highlight: { backgroundColor: colorPalette.mainHighlight },
+  highlight: { color: colorPalette.mainHighlight },
+  backgroundHighlight: { backgroundColor: colorPalette.mainHighlight },
   thirdButton: { backgroundColor: colorPalette.secondaryButton },
 };
 

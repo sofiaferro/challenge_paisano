@@ -39,12 +39,12 @@ const DropdownMenu = styled.div`
 const DropdownMenuContainer = styled.div`
   padding-bottom: 2em;
   display: flex;
-  width: calc(10px + 25vw);
+  width: 311px;
   @media (max-width: 680px) {
     width: 100%;
   }
 `;
-const ImageContainer = styled.div`
+const ImageWrapper = styled.div`
   ${thirdText};
   border-radius: 1em;
   border-style: solid;
@@ -103,9 +103,9 @@ const PsDropdownMenu = ({
         style={{ ...style }}
       >
         <p ref={textRef}>{placeholder}</p>
-        <ImageContainer>
+        <ImageWrapper>
           <Image src={iconChevron} alt={'Icon search bar'} />
-        </ImageContainer>
+        </ImageWrapper>
       </DropdownMenu>
     </DropdownMenuContainer>
   );

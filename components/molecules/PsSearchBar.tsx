@@ -94,7 +94,7 @@ const PsSearchBar = ({ placeholder, onClick, style }: PsSearchBarProps) => {
         onMouseLeave={handleOnMouseLeave}
         style={{ ...style }}
       >
-        <CustomInput ref={textRef} placeholder={placeholder} />
+        <CustomInput type={'search'} ref={textRef} placeholder={placeholder} />
         <Image src={iconSearchBar} alt={'Icon search bar'} />
       </SearchBar>
     </SearchBarContainer>

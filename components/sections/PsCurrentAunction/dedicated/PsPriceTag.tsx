@@ -5,11 +5,11 @@ import Image from 'next/image';
 import { theme } from '@/styles/theme';
 import texts from '@/styles/texts';
 
-import shape from '@/images/auction-shape-test.png';
+import shape from '@/images/aunction-shape-test.png';
 
 // styles
-const { highlight, primaryText } = theme;
-const { caption } = texts;
+const { backgroundHighlight } = theme;
+const { caption, secondaryCaption } = texts;
 
 const Container = styled.div`
   display: flex;
@@ -19,8 +19,8 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-const ImageContainer = styled.div`
-  ${highlight};
+const ImageWrapper = styled.div`
+  ${backgroundHighlight};
   border-radius: 2em;
   width: 32px;
   height: 32px;
@@ -37,21 +37,17 @@ const TextContainer = styled.div`
 `;
 
 const TitleTag = styled.p`
-  ${caption};
+  ${secondaryCaption};
 `;
 
 const ContentTag = styled.p`
   ${caption};
-  ${primaryText};
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 24px;
 `;
 
 const PsPriceTag = () => {
   return (
     <Container>
-      <ImageContainer>
+      <ImageWrapper>
         <Image
           src={shape}
           alt={'Green tag with the price'}
@@ -59,7 +55,7 @@ const PsPriceTag = () => {
           height={20}
           style={{ borderRadius: '2em' }}
         />
-      </ImageContainer>
+      </ImageWrapper>
       <TextContainer>
         <TitleTag>Instant price</TitleTag>
         <ContentTag>3.5 ETH</ContentTag>

@@ -5,13 +5,14 @@ import { Power2, gsap } from 'gsap';
 import styled from 'styled-components';
 
 import { theme } from '@/styles/theme';
-import { useStyleState } from '@/styles/context';
+import { useStyleState } from '@/contexts/styles';
 
 import { LayoutProps } from '@/hooks/useDeviceSize';
 
 import PsBurguerIcon from './dedicated/PsBurguerIcon';
 import PsNavbarItem from './dedicated/PsNavbarItem';
 import PsButton from '@/components/molecules/PsButton';
+import PsVerticalDivider from '@/components/molecules/PsVerticalDivider';
 
 import logo from '@/images/logo.png';
 
@@ -69,8 +70,6 @@ const PsNavBar = () => {
     device: { A, S },
   } = useStyleState() as LayoutProps;
 
-  const isMobOrTab = A || S;
-
   // refs
   const topRef = useRef(null);
   const bottomRef = useRef(null);
@@ -104,7 +103,7 @@ const PsNavBar = () => {
       {
         opacity: 1,
         display: 'flex',
-        height: '100vw',
+        height: '100vh',
       }
     );
     tl.fromTo(
@@ -123,7 +122,7 @@ const PsNavBar = () => {
     return () => {
       tl.kill();
     };
-  }, [tl]);
+  }, [tl, menuChildren]);
 
   // data
   const mobileMenuItems = [
@@ -164,8 +163,9 @@ const PsNavBar = () => {
       <Navbar>
         <LogoContainer>
           <Image src={logo} alt='NFTPaisanos logo' />
-          {!isMobOrTab && (
+          {!A && !S && (
             <DesktopNavMenu>
+              <PsVerticalDivider />
               {desktopMenuItems.map((item, i) => (
                 <PsNavbarItem
                   item={item}
@@ -178,12 +178,12 @@ const PsNavBar = () => {
             </DesktopNavMenu>
           )}
         </LogoContainer>
-        {isMobOrTab && (
+        {(A || S) && (
           <ToggleContainer onClick={handleToggle}>
             <PsBurguerIcon topRef={topRef} bottomRef={bottomRef} />
           </ToggleContainer>
         )}
-        {!isMobOrTab && (
+        {!A && !S && (
           <PsButton
             title={'Conect Wallet'}
             onClick={(e: React.MouseEvent<HTMLDivElement>) =>
@@ -192,7 +192,7 @@ const PsNavBar = () => {
           />
         )}
       </Navbar>
-      {isMobOrTab && (
+      {(A || S) && (
         <MobileNavMenu ref={menuRef}>
           {mobileMenuItems.map((item, i) => (
             <PsNavbarItem

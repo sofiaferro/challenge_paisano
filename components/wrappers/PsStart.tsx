@@ -1,7 +1,7 @@
 import React, { ElementType } from 'react';
 import type { AppProps } from 'next/app';
 
-import { useStyleUpdater } from '@/styles/context';
+import { useStyleUpdater } from '@/contexts/styles';
 import { LayoutProps } from '@/hooks/useDeviceSize';
 
 interface CustomAppProps<P = LayoutProps> extends AppProps<P> {
@@ -16,7 +16,6 @@ const PsStarts: ElementType = ({
   // set style in context
   const storeUpdater = useStyleUpdater();
   storeUpdater(['UPDATE_SIZE', startProps]);
-
   return (
     <Component
       {...{

@@ -6,58 +6,58 @@ import styled from 'styled-components';
 import texts from '@/styles/texts';
 import { theme } from '@/styles/theme';
 
-interface PsNFTCategoryFilterProps {
+import Image from 'next/image';
+
+import iconLoading from '@/images/icon-loading.svg';
+
+interface PsLoadButtonProps {
   title: string;
   onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
   style?: object;
-  isActive: boolean;
 }
 
 // styles
 const { button } = texts;
-const { fourthText, thirdButton, firstBg, thirdText } = theme;
+const { secondaryButton, thirdText } = theme;
 
-const Button = styled.div`
+const LoadButton = styled.div`
   ${button};
-  ${thirdButton};
+  ${secondaryButton};
   border-radius: 2em;
   border-style: solid;
   border-width: 2px;
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-  text-align: center;
+  padding: 1em;
+  text-align: left;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 52px;
+  justify-content: center;
 `;
 
-const ButtonContainer = styled.div`
-  padding: 0.2em;
-  padding-bottom: 2em;
-  width: 100%;
+const LoadButtonContainer = styled.div`
+  display: flex;
+  width: calc(10px + 25vw);
   @media (max-width: 680px) {
-    width: calc(10px + 20vw);
+    width: 100%;
   }
 `;
-
-const Text = styled.p`
-  ${fourthText};
+const Title = styled.p`
+  padding-left: 0.5em;
 `;
 
-const PsNFTCategoryFilter = ({
-  title,
-  onClick,
-  style,
-  isActive,
-}: PsNFTCategoryFilterProps) => {
+const PsLoadButton = ({ title, onClick, style }: PsLoadButtonProps) => {
   // refs
-  const buttonRef = useRef(null);
+  const textRef = useRef(null);
 
   // animations
   gsap.defaults({ overwrite: 'auto' });
   const tl = gsap.timeline({ paused: true, reversed: true });
 
   useEffect(() => {
-    tl.to(buttonRef?.current, {
-      scaleX: 1.05,
-      scaleY: 1.05,
+    tl.to(textRef.current, {
+      ...thirdText,
       duration: 0.1,
     });
     return () => {
@@ -81,26 +81,19 @@ const PsNFTCategoryFilter = ({
   };
 
   return (
-    <ButtonContainer>
-      <Button
+    <LoadButtonContainer>
+      <LoadButton
         onClick={(e: React.MouseEvent<HTMLDivElement>) => handleOnClick(e)}
-        ref={buttonRef}
         onMouseEnter={handleOnMouseEnter}
         onMouseLeave={handleOnMouseLeave}
-        style={{
-          ...style,
-          backgroundColor: isActive
-            ? thirdButton.backgroundColor
-            : firstBg.backgroundColor,
-          borderStyle: isActive ? button.color : 'none',
-        }}
+        style={{ ...style }}
       >
-        <Text style={{ color: isActive ? fourthText.color : thirdText.color }}>
-          {title}
-        </Text>
-      </Button>
-    </ButtonContainer>
+        <Image src={iconLoading} alt={'Icon search bar'} />
+
+        <Title ref={textRef}>{title}</Title>
+      </LoadButton>
+    </LoadButtonContainer>
   );
 };
 
-export default PsNFTCategoryFilter;
+export default PsLoadButton;

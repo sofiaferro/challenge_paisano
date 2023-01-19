@@ -50,7 +50,7 @@ const PsButton = ({
   const tl = gsap.timeline({ paused: true, reversed: true });
 
   useEffect(() => {
-    tl.to(buttonRef?.current, {
+    tl.to(buttonRef.current, {
       scaleX: 1.05,
       scaleY: 1.05,
       duration: 0.1,

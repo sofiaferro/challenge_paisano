@@ -5,13 +5,11 @@ import styled from 'styled-components';
 import Image from 'next/image';
 
 import texts from '@/styles/texts';
-import { theme } from '@/styles/theme';
 
-import avatar from '@/images/auction-avatar-test.png';
+import avatar from '@/images/aunction-avatar-test.png';
 
 // styles
-const { caption } = texts;
-const { primaryText } = theme;
+const { secondaryCaption, caption } = texts;
 
 const Container = styled.div`
   display: flex;
@@ -29,12 +27,11 @@ const TextContainer = styled.div`
 `;
 
 const TitleTag = styled.p`
-  ${caption};
+  ${secondaryCaption};
 `;
 
 const ContentTag = styled.p`
   ${caption};
-  ${primaryText};
   font-weight: 500;
   font-size: 14px;
   line-height: 24px;
@@ -54,7 +51,7 @@ const PsCreatorTag = () => {
       </div>
       <TextContainer>
         <TitleTag>Creator</TitleTag>
-        <ContentTag>Enrico Cole</ContentTag>
+        <ContentTag>safsdf sdfsdf</ContentTag>
       </TextContainer>
     </Container>
   );

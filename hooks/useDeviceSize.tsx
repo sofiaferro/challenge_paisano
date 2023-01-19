@@ -30,7 +30,7 @@ export interface LayoutProps {
 }
 
 // instances
-const breakPoints: BreakPointsProps = {
+export const breakPoints: BreakPointsProps = {
   A: 360,
   S: 680,
   M: 960,
@@ -38,7 +38,7 @@ const breakPoints: BreakPointsProps = {
   G: 1440,
 };
 
-const pointsMap: PointsMapProps = {
+export const pointsMap: PointsMapProps = {
   A: false,
   S: false,
   M: false,
@@ -47,10 +47,13 @@ const pointsMap: PointsMapProps = {
 };
 
 // find the device size in the breakpoints range
-const findDevice = (breakPoints: BreakPointsProps, value: number) => {
+export const findDevice = (breakPoints: BreakPointsProps, value: number) => {
   const keys = Object.keys(breakPoints);
   for (let i = 1; i < keys.length - 1; i++) {
-    if (
+    pointsMap[keys[i]] = false;
+    if (value < breakPoints.A) {
+      return { ...pointsMap, A: true };
+    } else if (
       value === breakPoints[keys[i]] ||
       (value > breakPoints[keys[i - 1]] && value < breakPoints[keys[i + 1]])
     ) {
@@ -58,30 +61,29 @@ const findDevice = (breakPoints: BreakPointsProps, value: number) => {
       return pointsMap;
     }
   }
-  return { ...pointsMap, A: true };
+  return { ...pointsMap, G: true };
 };
 
-// hook to find the size of the device
-const useDeviceSize = (): LayoutProps | undefined => {
-  if (typeof window !== 'undefined') {
-    const [size, setSize] = useState<SizeProps>({
-      width: window?.innerWidth,
-      height: window?.innerHeight,
-    });
+// scallable solution to breakpoints change
+export const useDeviceSize = () => {
+  const [windowSize, setWindowSize] = useState({
+    width: undefined,
+    height: undefined,
+  });
 
-    useEffect(() => {
-      const handleResize = () => {
-        setSize({ width: window.innerWidth, height: window.innerHeight });
-      };
-      window.addEventListener('resize', handleResize);
-      return () => {
-        window.removeEventListener('resize', handleResize);
-      };
-    }, []);
+  useEffect(() => {
+    function handleResize() {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    }
 
-    const device = findDevice(breakPoints, size.width);
-    return { size, device };
-  }
+    window.addEventListener('resize', handleResize);
+
+    handleResize();
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  return windowSize;
 };
-
-export default useDeviceSize;

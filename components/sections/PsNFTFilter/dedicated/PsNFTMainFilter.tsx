@@ -22,6 +22,9 @@ const FilterContainer = styled.div`
   flex-direction: row;
   align-items: flex-start;
   width: calc(10px + 30vw);
+  @media (max-width: 680px) {
+    width: 100%;
+  }
 `;
 
 const PsNFTMainFilter = () => {

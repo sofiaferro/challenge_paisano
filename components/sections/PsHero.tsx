@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import styled from 'styled-components';
 
@@ -6,19 +6,20 @@ import { theme } from '@/styles/theme';
 import texts from '@/styles/texts';
 
 import PsButton from '../molecules/PsButton';
+import gsap from 'gsap';
 
 interface PsHeroProps {
   action: () => void;
 }
 
 // styles
-const { h1, p } = texts;
-const { firstBg, thirdText } = theme;
+const { h3, h4, secondaryHairline } = texts;
+const { firstBg } = theme;
 
 const Container = styled.div`
   ${firstBg};
   width: 100%;
-  height: 40vw;
+  height: 25vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,30 +30,60 @@ const Container = styled.div`
   }
 `;
 
-const Title = styled.h1`
-  ${h1};
+const Title = styled.h3`
+  ${h3};
   padding: 0.5em;
   text-align: center;
+  @media (max-width: 680px) {
+    ${h4};
+  }
 `;
 
 const Text = styled.p`
-  ${p};
-  ${thirdText};
+  ${secondaryHairline};
   text-transform: uppercase;
-  font-size: 12px;
   @media (max-width: 680px) {
     font-size: 10px;
   }
 `;
 
 const PsHero = ({ action }: PsHeroProps) => {
+  // refs
+  const heroRef = useRef(null);
+  const heroChildren = (heroRef.current as unknown as HTMLUListElement)
+    ?.children;
+
+  // animations
+  gsap.defaults({ overwrite: 'auto' });
+  const tl = gsap.timeline();
+
+  useEffect(() => {
+    tl.fromTo(
+      heroChildren,
+      {
+        y: -30,
+        opacity: 0,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        stagger: 0.1,
+        duration: 1,
+      }
+    );
+    tl.play();
+    return () => {
+      tl.kill;
+    };
+  }, [tl, heroChildren]);
+
   // data
   const data = {
     text: 'The new creative economy.',
     title: 'Create, explore, & SELL digital art NFTs.',
   };
   return (
-    <Container>
+    <Container ref={heroRef}>
       <Text>{data.title}</Text>
       <Title>{data.text}</Title>
       <PsButton title={'Explore'} onClick={action} />

@@ -14,8 +14,8 @@ import PsCreatorTag from './PsCreatorTag';
 import PsPriceTag from './PsPriceTag';
 
 // styles
-const { h1 } = texts;
-const { firstBg, secondBg, primaryText, thirdText, button } = theme;
+const { h1, h2, h4, secondaryBody, primaryBody } = texts;
+const { firstBg, secondBg, thirdText, button } = theme;
 
 const Container = styled.div`
   ${firstBg};
@@ -88,11 +88,8 @@ const Footer = styled.div`
   padding-top: 2em;
 `;
 
-const AuctionEnding = styled.p`
-  ${primaryText};
-  font-family: 'Poppins';
-  font-size: 16px;
-  font-weight: 500;
+const AunctionEnding = styled.p`
+  ${secondaryBody};
 `;
 
 const ItemContainer = styled.div`
@@ -101,39 +98,20 @@ const ItemContainer = styled.div`
 `;
 
 const Amount = styled.h4`
-  ${primaryText};
-  font-family: 'DM Sans';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 32px;
-  line-height: 40px;
+  ${h4}
 `;
 
 const Time = styled.h4`
+  ${secondaryBody};
   ${thirdText};
-  font-family: 'DM Sans';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 24px;
 `;
 
 const CurrentETH = styled.h2`
-  ${primaryText};
-  font-family: 'DM Sans';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 48px;
-  line-height: 56px;
+  ${h2};
 `;
 
 const CurrentUSD = styled.h1`
-  ${thirdText};
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 32px;
+  ${primaryBody}
   padding-bottom: 1em;
 `;
 
@@ -160,7 +138,7 @@ const ArrowImage = styled.div`
 
 // data
 const data = {
-  artist_name: 'Marco Carrillo®',
+  artist_name: 'the creator network®',
   current_bid_eth: '1.00 ETH',
   current_bid_usd: '$3,618.36',
   remaining_time: {
@@ -181,10 +159,10 @@ const PsCurrentBid = () => {
         </Tags>
       </Header>
       <Body>
-        <AuctionEnding>Current bid</AuctionEnding>
+        <AunctionEnding>Current bid</AunctionEnding>
         <CurrentETH>{data.current_bid_eth}</CurrentETH>
         <CurrentUSD>{data.current_bid_usd}</CurrentUSD>
-        <AuctionEnding>Auction ending in</AuctionEnding>
+        <AunctionEnding>Aunction ending in</AunctionEnding>
         <TimeContainer>
           <ItemContainer>
             <Amount>{data.remaining_time.hrs}</Amount>
