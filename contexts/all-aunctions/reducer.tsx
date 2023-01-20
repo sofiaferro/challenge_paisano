@@ -7,6 +7,8 @@ const aunctionsReducer = (aunctions: object, action: StringKeyValuePair) => {
   switch (name) {
     case 'UPDATE_AUCTIONS':
       return { ...aunctions, ...payload };
+    case 'SET_ORDERED_AUCTIONS':
+      return { ...aunctions, ...payload };
     default:
       return aunctions;
   }

@@ -1,10 +1,16 @@
 import React from 'react';
-import moment from 'moment';
 
 import { theme } from '@/styles/theme';
 import texts from '@/styles/texts';
 
 import styled from 'styled-components';
+
+import {
+  formatEndDate,
+  formatHighestBid,
+  formatRawUsd,
+  formattedConversion,
+} from '@/helpers';
 
 import PsButton from '@/components/molecules/PsButton';
 import PsCreatorTag from './PsCreatorTag';
@@ -134,20 +140,12 @@ const PsCurrentBid = ({
   prices: PricesProps;
 }) => {
   // format end date
-  const endsAt = moment(pop.endsAt, 'YYYY/MM/DD');
-  const month = endsAt.format('M');
-  const day = endsAt.format('D');
-  const year = endsAt.format('YY');
+  const endsAt = formatEndDate(pop.endsAt);
 
   // format currency
-  const highestBid = pop.highestBid
-    .replace('.', ',')
-    .substring(0, pop.highestBid.length - 4)
-    .replace(',', '.');
-  const rawUsd = parseFloat(prices.usd.toString().replace(/,/g, ''));
-
-  const conversion = rawUsd * highestBid;
-  const formattedConversion = parseFloat(conversion.toString()).toFixed(2);
+  const highestBid = formatHighestBid(pop.highestBid);
+  const rawUsd = formatRawUsd(prices.usd);
+  const conversion = formattedConversion(rawUsd * highestBid);
 
   return (
     <Container>
@@ -161,19 +159,19 @@ const PsCurrentBid = ({
       <Body>
         <AunctionEnding>Highest bid</AunctionEnding>
         <CurrentETH>{pop.highestBid}</CurrentETH>
-        <CurrentUSD>{`$${formattedConversion}`}</CurrentUSD>
+        <CurrentUSD>{`$${conversion}`}</CurrentUSD>
         <AunctionEnding>Aunction ending on</AunctionEnding>
         <TimeContainer>
           <ItemContainer>
-            <Amount>{month}</Amount>
+            <Amount>{endsAt.month}</Amount>
             <Time>month</Time>
           </ItemContainer>
           <ItemContainer>
-            <Amount>{day}</Amount>
+            <Amount>{endsAt.day}</Amount>
             <Time>day</Time>
           </ItemContainer>
           <ItemContainer>
-            <Amount>{year}</Amount>
+            <Amount>{endsAt.year}</Amount>
             <Time>year</Time>
           </ItemContainer>
         </TimeContainer>

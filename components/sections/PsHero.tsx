@@ -19,15 +19,21 @@ const { primaryBg } = theme;
 const Container = styled.div`
   ${primaryBg};
   width: 100%;
-  height: 25vw;
+  height: 60vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 2em;
   justify-content: center;
   @media (max-width: 680px) {
-    height: 25vh;
+    height: 40vh;
   }
+`;
+
+const Content = styled.div`
+  top: 50px;
+  position: relative;
+  align-items: center;
 `;
 
 const Title = styled.h3`
@@ -41,6 +47,7 @@ const Title = styled.h3`
 
 const Text = styled.p`
   ${secondaryHairline};
+  text-align: center;
   text-transform: uppercase;
   @media (max-width: 680px) {
     font-size: 10px;
@@ -84,9 +91,11 @@ const PsHero = ({ action }: PsHeroProps) => {
   };
   return (
     <Container ref={heroRef}>
-      <Text>{data.title}</Text>
-      <Title>{data.text}</Title>
-      <PsButton title={'Explore'} onClick={action} />
+      <Content>
+        <Text>{data.title}</Text>
+        <Title>{data.text}</Title>
+        <PsButton title={'Explore'} onClick={action} />
+      </Content>
     </Container>
   );
 };

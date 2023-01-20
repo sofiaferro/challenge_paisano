@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react';
+import React, { createRef, useEffect, useRef, useState } from 'react';
 
-import gsap from 'gsap';
+import gsap, { Power2 } from 'gsap';
 import styled from 'styled-components';
 
 import texts from '@/styles/texts';
@@ -11,18 +11,20 @@ import Image from 'next/image';
 import iconChevron from '@/images/icon-chevron.svg';
 
 interface PsDropdownMenuProps {
-  placeholder: string;
-  onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
+  options: object[];
+  onChange: (val: number | string) => void;
   style?: object;
+  defaultPlaceholder: string;
 }
 
 // styles
 const { button } = texts;
-const { secondaryButton, thirdText } = theme;
+const { secondaryButton, thirdText, primaryBg } = theme;
 
 const DropdownMenu = styled.div`
   ${button};
   ${secondaryButton};
+  ${primaryBg};
   border-radius: 1em;
   border-style: solid;
   border-width: 2px;
@@ -37,12 +39,12 @@ const DropdownMenu = styled.div`
 `;
 
 const DropdownMenuContainer = styled.div`
-  padding-bottom: 2em;
+  padding-top: 1em;
+  padding-bottom: 1em;
   display: flex;
+  flex-direction: column;
+  position: relative;
   width: 311px;
-  @media (max-width: 680px) {
-    width: 100%;
-  }
 `;
 const ImageWrapper = styled.div`
   ${thirdText};
@@ -57,56 +59,120 @@ const ImageWrapper = styled.div`
   align-items: center;
 `;
 
-const PsDropdownMenu = ({
-  placeholder,
-  onClick,
-  style,
-}: PsDropdownMenuProps) => {
-  // refs
-  const textRef = useRef(null);
+const MobileNavMenu = styled.ul`
+  ${primaryBg};
+  ${secondaryButton};
+  padding: 1em;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  border-bottom-left-radius: 1em;
+  border-bottom-right-radius: 1em;
+  border-style: solid;
+  border-width: 2px;
+  top: 60px;
+  z-index: 1;
+  position: absolute;
+`;
 
+const Item = styled.li`
+  ${button};
+  ${secondaryButton};
+  list-style: none;
+  padding: 1em;
+`;
+
+const PsDropdownMenu = ({
+  style,
+  onChange,
+  options,
+  defaultPlaceholder,
+}: PsDropdownMenuProps) => {
   // animations
   gsap.defaults({ overwrite: 'auto' });
-  const tl = gsap.timeline({ paused: true, reversed: true });
+
+  // animations
+  const tl = gsap.timeline({
+    paused: true,
+    reversed: true,
+    defaults: { ease: Power2.easeInOut },
+  });
+
+  // handlers
+  const handleOnClick = () => {
+    return tl.reversed() ? tl.play() : tl.reverse();
+  };
+
+  // refs
+  const listRef = useRef(null);
+  const chevronRef = useRef(null);
+  const menuRef = useRef(null);
 
   useEffect(() => {
-    tl.to(textRef.current, {
-      ...thirdText,
-      duration: 0.1,
+    tl.to(chevronRef.current, {
+      transform: 'rotate(180deg)',
+      duration: 0.2,
     });
+    tl.fromTo(
+      menuRef.current,
+      {
+        borderBottomLeftRadius: '1em',
+        borderBottomRightRadius: '1em',
+      },
+      {
+        borderBottomLeftRadius: 0,
+        borderBottomRightRadius: 0,
+        duration: 0.01,
+      }
+    );
+    tl.fromTo(
+      listRef.current,
+      {
+        display: 'none',
+        opacity: 0,
+      },
+      {
+        opacity: 1,
+        display: 'flex',
+      }
+    );
+
     return () => {
-      tl.kill;
+      tl.kill();
     };
   }, [tl]);
 
-  // handlers
-  const handleOnMouseEnter = () => {
-    return tl.play();
-  };
+  const [placeholder, setPlaceholder] = useState(defaultPlaceholder);
 
-  const handleOnMouseLeave = () => {
-    return tl.reverse();
-  };
-
-  const handleOnClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    (e as React.MouseEvent<HTMLDivElement>).preventDefault();
+  const handleOnChange = (item: { text: string; value: number }) => {
+    setPlaceholder(item.text);
     tl.reverse();
-    return onClick(e);
+    return onChange(item.value);
   };
 
   return (
     <DropdownMenuContainer>
       <DropdownMenu
-        onClick={(e: React.MouseEvent<HTMLDivElement>) => handleOnClick(e)}
-        onMouseEnter={handleOnMouseEnter}
-        onMouseLeave={handleOnMouseLeave}
+        ref={menuRef}
+        onClick={() => handleOnClick()}
         style={{ ...style }}
       >
-        <p ref={textRef}>{placeholder}</p>
+        <p>{placeholder}</p>
         <ImageWrapper>
-          <Image src={iconChevron} alt={'Icon search bar'} />
+          <Image src={iconChevron} alt={'Icon chevron bar'} ref={chevronRef} />
         </ImageWrapper>
       </DropdownMenu>
+      <MobileNavMenu ref={listRef}>
+        {options.map((item, i) => (
+          <Item
+            value={item.value}
+            key={`key_menu_item_${i}_${item.text}`}
+            onClick={() => handleOnChange(item)}
+          >
+            {item.text}
+          </Item>
+        ))}
+      </MobileNavMenu>
     </DropdownMenuContainer>
   );
 };

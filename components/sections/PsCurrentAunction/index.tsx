@@ -5,7 +5,7 @@ import Image from 'next/image';
 import styled from 'styled-components';
 import { theme } from '@/styles/theme';
 
-import PsCurrentBid from './dedicated/PsCurrentBid';
+import PsCurrentBid from './dedicated/molecules/PsCurrentBid';
 
 import { usePricesState } from '@/contexts/prices';
 import { usePopularAunctionsState } from '@/contexts/popular-aunctions';
@@ -27,9 +27,10 @@ const Container = styled.div`
 
 const Content = styled.div`
   display: flex;
-  width: 80vw;
+  width: 85vw;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   @media (max-width: 680px) {
     flex-direction: column;
     width: 100%;
@@ -83,8 +84,8 @@ const PsCurrentAunction = () => {
         <Image
           src={currentAu.media.image}
           alt={'Main aunction image'}
-          width={500}
-          height={600}
+          width={300}
+          height={500}
           style={{
             borderRadius: '2em',
             paddingBottom: '1em',

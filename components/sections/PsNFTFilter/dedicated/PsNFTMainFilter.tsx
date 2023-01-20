@@ -4,7 +4,12 @@ import styled from 'styled-components';
 
 import PsSearchBar from '@/components/molecules/PsSearchBar';
 import PsDropdownMenu from '@/components/molecules/PsDropdownMenu';
-import PsNFTCategoryFilter from './PsNFTCategoryFilter';
+import PsNFTCategoryFilter from './organisms/PsNFTCategoryFilter';
+
+interface MainFilterProps {
+  dateFilterOptions: Array<{}>;
+  handleDateFilter: (val: number | string) => void;
+}
 
 // styles
 const Content = styled.div`
@@ -27,15 +32,15 @@ const FilterContainer = styled.div`
   }
 `;
 
-const PsNFTMainFilter = () => {
-  // handlers
+const PsNFTMainFilter = ({
+  dateFilterOptions,
+  handleDateFilter,
+}: MainFilterProps) => {
+  // general handlers : todo
   const handleSearch = () => {
     console.log('Search');
   };
 
-  const handleMenu = () => {
-    console.log('Menu');
-  };
   const handleAllItemsFilter = () => {
     console.log('All items');
   };
@@ -47,10 +52,14 @@ const PsNFTMainFilter = () => {
   };
 
   return (
-    <div style={{ width: '80vw', alignSelf: 'center' }}>
+    <div style={{ width: '85vw', alignSelf: 'center' }}>
       <PsSearchBar placeholder={'Type your keywords'} onClick={handleSearch} />
       <Content>
-        <PsDropdownMenu placeholder={'Recently added'} onClick={handleMenu} />
+        <PsDropdownMenu
+          defaultPlaceholder={'Date'}
+          options={dateFilterOptions}
+          onChange={handleDateFilter}
+        />
         <FilterContainer>
           <PsNFTCategoryFilter
             title={'All items'}

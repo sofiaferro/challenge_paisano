@@ -9,9 +9,7 @@ import texts from '@/styles/texts';
 
 import PsHorizontalDivider from '@/components/molecules/PsHorizontalDividerShort';
 
-import imageTest from '@/images/aunction-img-test.png';
 import iconCandlestick from '@/images/icon-candlesticks.svg';
-import avatar from '@/images/aunction-avatar-test.png';
 import { AunctionsProps } from '@/contexts/all-aunctions';
 
 // styles
@@ -108,16 +106,7 @@ const HighestBid = styled.p`
   padding-left: 0.5em;
 `;
 
-const ImageWrapper = styled(Image)`
-  width: 100%;
-  height: 100%;
-  position: relative;
-  border-radius: 2em;
-  margin-bottom: 2em;
-`;
-
 const PsNFTCard = ({ item }: AunctionsProps) => {
-  console.log(item);
   return (
     <Container>
       <CardContainer>

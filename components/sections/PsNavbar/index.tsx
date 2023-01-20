@@ -11,10 +11,10 @@ import { LayoutProps } from '@/hooks/useDeviceSize';
 
 import Image from 'next/image';
 
-import PsBurguerIcon from './dedicated/PsBurguerIcon';
-import PsNavbarItem from './dedicated/PsNavbarItem';
 import PsButton from '@/components/molecules/PsButton';
 import PsVerticalDivider from '@/components/molecules/PsVerticalDivider';
+import PsBurguerIcon from './dedicated/molecules/PsBurguerIcon';
+import PsNavbarItem from './dedicated/molecules/PsNavbarItem';
 
 import logo from '@/images/logo.png';
 
@@ -29,6 +29,9 @@ const Navbar = styled.nav`
   flex-direction: row;
   align-items: center;
   padding: 2em;
+  z-index: 3;
+  position: fixed;
+  padding-bottom: 2em;
   justify-content: space-between;
   @media (max-width: 680px) {
     height: 104px;
@@ -40,7 +43,7 @@ const MobileNavMenu = styled.ul`
   padding: 2em;
   flex-direction: column;
   position: absolute;
-  width: 100%;
+  width: 100vw;
   justify-content: center;
   z-index: 2;
   top: 80px;
@@ -198,20 +201,20 @@ const PsNavBar = () => {
             }
           />
         )}
+        {(A || S) && (
+          <MobileNavMenu ref={menuRef}>
+            {mobileMenuItems.map((item, i) => (
+              <PsNavbarItem
+                item={item}
+                key={`key_menu_item_${i}_${item.href}`}
+                onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) =>
+                  handlePushPage(e, item.href)
+                }
+              />
+            ))}
+          </MobileNavMenu>
+        )}
       </Navbar>
-      {(A || S) && (
-        <MobileNavMenu ref={menuRef}>
-          {mobileMenuItems.map((item, i) => (
-            <PsNavbarItem
-              item={item}
-              key={`key_menu_item_${i}_${item.href}`}
-              onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) =>
-                handlePushPage(e, item.href)
-              }
-            />
-          ))}
-        </MobileNavMenu>
-      )}
     </div>
   );
 };
