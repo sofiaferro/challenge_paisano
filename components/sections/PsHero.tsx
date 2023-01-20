@@ -14,10 +14,10 @@ interface PsHeroProps {
 
 // styles
 const { h3, h4, secondaryHairline } = texts;
-const { firstBg } = theme;
+const { primaryBg } = theme;
 
 const Container = styled.div`
-  ${firstBg};
+  ${primaryBg};
   width: 100%;
   height: 25vw;
   display: flex;

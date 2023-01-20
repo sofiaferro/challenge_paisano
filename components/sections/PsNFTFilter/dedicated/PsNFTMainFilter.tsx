@@ -47,7 +47,7 @@ const PsNFTMainFilter = () => {
   };
 
   return (
-    <div style={{ width: '100%' }}>
+    <div style={{ width: '80vw', alignSelf: 'center' }}>
       <PsSearchBar placeholder={'Type your keywords'} onClick={handleSearch} />
       <Content>
         <PsDropdownMenu placeholder={'Recently added'} onClick={handleMenu} />

@@ -1,41 +1,45 @@
 import React from 'react';
+import moment from 'moment';
 
 import { theme } from '@/styles/theme';
 import texts from '@/styles/texts';
 
 import styled from 'styled-components';
 
-import Image from 'next/image';
-import arrowLeft from '@/images/arrow-left.png';
-import arrowRight from '@/images/arrow-right.png';
-
 import PsButton from '@/components/molecules/PsButton';
 import PsCreatorTag from './PsCreatorTag';
 import PsPriceTag from './PsPriceTag';
 
+import { AunctionsProps } from '@/contexts/all-aunctions';
+import { PricesProps } from '@/contexts/prices';
+
 // styles
 const { h1, h2, h4, secondaryBody, primaryBody } = texts;
-const { firstBg, secondBg, thirdText, button } = theme;
+const { primaryBg, secondaryBg, thirdText, button } = theme;
 
 const Container = styled.div`
-  ${firstBg};
+  ${primaryBg};
   display: flex;
-  width: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+  width: 100%;
   @media (min-width: 680px) {
+    width: auto;
     padding-left: 2em;
     padding-right: 2em;
   }
 `;
 
 const Header = styled.div`
-  width: 100%;
   justify-content: center;
   display: flex;
   flex-direction: column;
+  width: 400px;
+  @media (max-width: 680px) {
+    width: 100%;
+  }
 `;
 
 const Tags = styled.div`
@@ -47,7 +51,7 @@ const Tags = styled.div`
 `;
 
 const Body = styled.div`
-  ${secondBg};
+  ${secondaryBg};
   align-items: center;
   justify-content: center;
   display: flex;
@@ -55,6 +59,10 @@ const Body = styled.div`
   width: 100%;
   border-radius: 2em;
   padding: 1em;
+  width: 325px;
+  @media (max-width: 680px) {
+    width: 100%;
+  }
 `;
 
 const TimeContainer = styled.div`
@@ -84,8 +92,11 @@ const Button = styled(PsButton)`
 `;
 
 const Footer = styled.div`
-  width: 100%;
   padding-top: 2em;
+  width: 400px;
+  @media (max-width: 680px) {
+    width: 100%;
+  }
 `;
 
 const AunctionEnding = styled.p`
@@ -115,66 +126,55 @@ const CurrentUSD = styled.h1`
   padding-bottom: 1em;
 `;
 
-const Arrows = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  padding: 2em;
-  @media (max-width: 680px) {
-    justify-content: center;
-  }
-`;
+const PsCurrentBid = ({
+  pop,
+  prices,
+}: {
+  pop: AunctionsProps;
+  prices: PricesProps;
+}) => {
+  // format end date
+  const endsAt = moment(pop.endsAt, 'YYYY/MM/DD');
+  const month = endsAt.format('M');
+  const day = endsAt.format('D');
+  const year = endsAt.format('YY');
 
-const ArrowImage = styled.div`
-  ${thirdText};
-  width: 32px;
-  height: 32px;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5em;
-`;
+  // format currency
+  const highestBid = pop.highestBid
+    .replace('.', ',')
+    .substring(0, pop.highestBid.length - 4)
+    .replace(',', '.');
+  const rawUsd = parseFloat(prices.usd.toString().replace(/,/g, ''));
 
-// data
-const data = {
-  artist_name: 'the creator network®',
-  current_bid_eth: '1.00 ETH',
-  current_bid_usd: '$3,618.36',
-  remaining_time: {
-    hrs: '19',
-    mins: '24',
-    secs: '19',
-  },
-};
+  const conversion = rawUsd * highestBid;
+  const formattedConversion = parseFloat(conversion.toString()).toFixed(2);
 
-const PsCurrentBid = () => {
   return (
     <Container>
       <Header>
-        <ArtistName>{data.artist_name}</ArtistName>
+        <ArtistName>the creator network®</ArtistName>
         <Tags>
-          <PsCreatorTag />
-          <PsPriceTag />
+          <PsCreatorTag authorAvatar={pop.authorAvatar} author={pop.author} />
+          <PsPriceTag instantPrice={pop.instantPrice} />
         </Tags>
       </Header>
       <Body>
-        <AunctionEnding>Current bid</AunctionEnding>
-        <CurrentETH>{data.current_bid_eth}</CurrentETH>
-        <CurrentUSD>{data.current_bid_usd}</CurrentUSD>
-        <AunctionEnding>Aunction ending in</AunctionEnding>
+        <AunctionEnding>Highest bid</AunctionEnding>
+        <CurrentETH>{pop.highestBid}</CurrentETH>
+        <CurrentUSD>{`$${formattedConversion}`}</CurrentUSD>
+        <AunctionEnding>Aunction ending on</AunctionEnding>
         <TimeContainer>
           <ItemContainer>
-            <Amount>{data.remaining_time.hrs}</Amount>
-            <Time>hrs</Time>
+            <Amount>{month}</Amount>
+            <Time>month</Time>
           </ItemContainer>
           <ItemContainer>
-            <Amount>{data.remaining_time.mins}</Amount>
-            <Time>mins</Time>
+            <Amount>{day}</Amount>
+            <Time>day</Time>
           </ItemContainer>
           <ItemContainer>
-            <Amount>{data.remaining_time.secs}</Amount>
-            <Time>secs</Time>
+            <Amount>{year}</Amount>
+            <Time>year</Time>
           </ItemContainer>
         </TimeContainer>
       </Body>
@@ -190,20 +190,6 @@ const PsCurrentBid = () => {
           title={'View item'}
           onClick={() => console.log('View item')}
         />
-        <Arrows>
-          <ArrowImage>
-            <Image src={arrowLeft} alt={'Left arrow'} />
-          </ArrowImage>
-          <ArrowImage
-            style={{
-              marginLeft: '1em',
-              borderStyle: 'solid',
-              borderWidth: '1px',
-            }}
-          >
-            <Image src={arrowRight} alt={'Right arrow'} />
-          </ArrowImage>
-        </Arrows>
       </Footer>
     </Container>
   );

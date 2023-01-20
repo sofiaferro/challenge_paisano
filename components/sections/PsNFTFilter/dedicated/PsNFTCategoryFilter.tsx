@@ -15,7 +15,7 @@ interface PsNFTCategoryFilterProps {
 
 // styles
 const { button } = texts;
-const { fourthText, thirdButton, firstBg, thirdText } = theme;
+const { fourthText, thirdButton, primaryBg, thirdText } = theme;
 
 const Button = styled.div`
   ${button};
@@ -91,7 +91,7 @@ const PsNFTCategoryFilter = ({
           ...style,
           backgroundColor: isActive
             ? thirdButton.backgroundColor
-            : firstBg.backgroundColor,
+            : primaryBg.backgroundColor,
           borderStyle: isActive ? button.color : 'none',
         }}
       >

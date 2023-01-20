@@ -6,8 +6,6 @@ import Image from 'next/image';
 
 import texts from '@/styles/texts';
 
-import avatar from '@/images/aunction-avatar-test.png';
-
 // styles
 const { secondaryCaption, caption } = texts;
 
@@ -37,12 +35,18 @@ const ContentTag = styled.p`
   line-height: 24px;
 `;
 
-const PsCreatorTag = () => {
+const PsCreatorTag = ({
+  authorAvatar,
+  author,
+}: {
+  authorAvatar: string;
+  author: string;
+}) => {
   return (
     <Container>
       <div>
         <Image
-          src={avatar}
+          src={authorAvatar}
           alt={'Creator picture'}
           width={32}
           height={32}
@@ -51,7 +55,7 @@ const PsCreatorTag = () => {
       </div>
       <TextContainer>
         <TitleTag>Creator</TitleTag>
-        <ContentTag>safsdf sdfsdf</ContentTag>
+        <ContentTag>{author}</ContentTag>
       </TextContainer>
     </Container>
   );

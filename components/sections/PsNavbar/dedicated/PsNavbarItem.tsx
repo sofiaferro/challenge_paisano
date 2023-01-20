@@ -4,6 +4,7 @@ import { gsap } from 'gsap';
 import styled from 'styled-components';
 
 import Link from 'next/link';
+
 import { theme } from '@/styles/theme';
 import texts from '@/styles/texts';
 

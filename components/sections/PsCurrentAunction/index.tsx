@@ -1,63 +1,112 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 
 import Image from 'next/image';
 
 import styled from 'styled-components';
 import { theme } from '@/styles/theme';
 
-import image from '@/images/aunction-img-test.png';
-
 import PsCurrentBid from './dedicated/PsCurrentBid';
 
 import { usePricesState } from '@/contexts/prices';
-import { useAunctionsState } from '@/contexts/all-aunctions';
+import { usePopularAunctionsState } from '@/contexts/popular-aunctions';
+
+import arrowLeft from '@/images/arrow-left.png';
+import arrowRight from '@/images/arrow-right.png';
 
 // styles
-const { firstBg } = theme;
+const { primaryBg, thirdText } = theme;
 
 const Container = styled.div`
-  ${firstBg};
+  ${primaryBg};
   padding: 2em;
-  width: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Content = styled.div`
   display: flex;
   width: 80vw;
-  position: relative;
-  align-self: center;
   flex-direction: row;
+  justify-content: center;
   @media (max-width: 680px) {
     flex-direction: column;
     width: 100%;
   }
 `;
 
-const ImageWrapper = styled(Image)`
-  width: 100%;
-  height: 100%;
-  position: relative;
-  border-radius: 2em;
-  margin-bottom: 2em;
+const Arrows = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 2em;
+  @media (max-width: 680px) {
+    justify-content: center;
+  }
+`;
+
+const ArrowImage = styled.div`
+  ${thirdText};
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em;
 `;
 
 const PsCurrentAunction = () => {
+  // get states
   const prices = usePricesState();
-  const aunctions = useAunctionsState();
+  const pop = usePopularAunctionsState();
 
+  // set index
+  const [index, setIndex] = useState(0);
+
+  // handlers
+  const handleNextItem = () => {
+    if (index >= Object.values(pop).length - 1) return setIndex(0);
+    setIndex((pre) => pre + 1);
+  };
+
+  const handlePrevItem = () => {
+    if (index <= 0) return setIndex(Object.values(pop).length - 1);
+    setIndex((pre) => pre - 1);
+  };
+
+  const currentAu = Object.values(pop)[index];
   return (
     <Container>
       <Content>
-        <ImageWrapper
-          src={image}
+        <Image
+          src={currentAu.media.image}
           alt={'Main aunction image'}
-          width={689}
-          height={919}
+          width={500}
+          height={600}
+          style={{
+            borderRadius: '2em',
+            paddingBottom: '1em',
+          }}
         />
-        <PsCurrentBid />
+        <PsCurrentBid pop={currentAu} prices={prices} />
       </Content>
+      <Arrows>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+          }}
+        >
+          <ArrowImage onClick={handlePrevItem}>
+            <Image src={arrowLeft} alt={'Left arrow'} />
+          </ArrowImage>
+          <ArrowImage onClick={handleNextItem}>
+            <Image src={arrowRight} alt={'Right arrow'} />
+          </ArrowImage>
+        </div>
+      </Arrows>
     </Container>
   );
 };

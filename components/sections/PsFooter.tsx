@@ -10,11 +10,11 @@ import logo from '@/images/logo.png';
 import PsHorizontalDivider from '../molecules/PsHorizontalDividerLarge';
 
 // styles
-const { secondBg, primaryText } = theme;
+const { secondaryBg, primaryText } = theme;
 const { primaryBody, secondaryCaption, secondaryBody } = texts;
 
 const Container = styled.div`
-  ${secondBg};
+  ${secondaryBg};
   width: 100%;
   display: flex;
   flex-direction: column;

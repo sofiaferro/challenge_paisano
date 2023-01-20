@@ -6,6 +6,7 @@ import { theme } from '@/styles/theme';
 import texts from '@/styles/texts';
 
 import shape from '@/images/aunction-shape-test.png';
+import { AunctionsProps } from '@/contexts/all-aunctions';
 
 // styles
 const { backgroundHighlight } = theme;
@@ -44,7 +45,7 @@ const ContentTag = styled.p`
   ${caption};
 `;
 
-const PsPriceTag = () => {
+const PsPriceTag = ({ instantPrice }: AunctionsProps) => {
   return (
     <Container>
       <ImageWrapper>
@@ -58,7 +59,7 @@ const PsPriceTag = () => {
       </ImageWrapper>
       <TextContainer>
         <TitleTag>Instant price</TitleTag>
-        <ContentTag>3.5 ETH</ContentTag>
+        <ContentTag>{instantPrice}</ContentTag>
       </TextContainer>
     </Container>
   );

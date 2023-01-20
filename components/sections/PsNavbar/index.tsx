@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 import { Power2, gsap } from 'gsap';
 import styled from 'styled-components';
@@ -9,6 +9,8 @@ import { useStyleState } from '@/contexts/styles';
 
 import { LayoutProps } from '@/hooks/useDeviceSize';
 
+import Image from 'next/image';
+
 import PsBurguerIcon from './dedicated/PsBurguerIcon';
 import PsNavbarItem from './dedicated/PsNavbarItem';
 import PsButton from '@/components/molecules/PsButton';
@@ -17,10 +19,10 @@ import PsVerticalDivider from '@/components/molecules/PsVerticalDivider';
 import logo from '@/images/logo.png';
 
 // styles
-const { firstBg } = theme;
+const { primaryBg } = theme;
 
 const Navbar = styled.nav`
-  ${firstBg};
+  ${primaryBg};
   width: 100%;
   height: '81px';
   display: flex;
@@ -34,7 +36,7 @@ const Navbar = styled.nav`
 `;
 
 const MobileNavMenu = styled.ul`
-  ${firstBg};
+  ${primaryBg};
   padding: 2em;
   flex-direction: column;
   position: absolute;
@@ -65,6 +67,9 @@ const LogoContainer = styled.div`
 `;
 
 const PsNavBar = () => {
+  // router
+  const router = useRouter();
+
   // layout
   const {
     device: { A, S },
@@ -162,7 +167,9 @@ const PsNavBar = () => {
     <div>
       <Navbar>
         <LogoContainer>
-          <Image src={logo} alt='NFTPaisanos logo' />
+          <div onClick={() => router.push('/')}>
+            <Image src={logo} alt='NFTPaisanos logo' />
+          </div>
           {!A && !S && (
             <DesktopNavMenu>
               <PsVerticalDivider />

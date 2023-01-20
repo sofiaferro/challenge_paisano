@@ -14,17 +14,19 @@ import iconCross from '@/images/icon-cross.svg';
 import PsHorizontalDivider from '@/components/molecules/PsHorizontalDividerShort';
 import PsNFTCard from './PsNFTCard';
 import PsLoadButton from '@/components/molecules/PsLoadButton';
+import { useAunctionsState } from '@/contexts/all-aunctions';
 
 // styles
 const { secondaryHairline, button } = texts;
-const { firstBg } = theme;
+const { primaryBg } = theme;
 
 const Container = styled.div`
-  ${firstBg};
+  ${primaryBg};
   display: flex;
   flex-direction: column;
   width: 100%;
   @media (min-width: 680px) {
+    width: 85vw;
     flex-direction: row;
   }
 `;
@@ -46,7 +48,22 @@ const ResetFilterContainer = styled.div`
   padding-bottom: 2em;
 `;
 
+const CardWrapper = styled.div``;
+
+const Content = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  padding-bottom: 2em;
+`;
+
 const PsNFTSideFilter = () => {
+  const aunctions = useAunctionsState();
+
   return (
     <Container>
       <div>
@@ -72,19 +89,20 @@ const PsNFTSideFilter = () => {
           <ResetFilter>Reset filter</ResetFilter>
         </ResetFilterContainer>
       </div>
-      <div
-        style={{
-          paddingBottom: '2em',
-          display: 'flex',
-          justifyContent: 'center',
-          flexDirection: 'column',
-          alignItems: 'center',
-          width: '100%',
-        }}
-      >
-        <PsNFTCard />
+      <div style={{display:'flex', flexDirection:'column'}}>
+
+      <Content>
+        {Object.values(aunctions).map((item) => (
+          <CardWrapper key={`key_all_aunctions_${item.id}`}>
+            <PsNFTCard item={item} />
+          </CardWrapper>
+        ))}}
+      </Content>
+      <div style={{alignSelf: 'center'}}>
+
         <PsLoadButton title={'Load more'} />
       </div>
+        </div>
     </Container>
   );
 };

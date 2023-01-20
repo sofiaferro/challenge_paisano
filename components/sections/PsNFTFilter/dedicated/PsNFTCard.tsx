@@ -12,9 +12,10 @@ import PsHorizontalDivider from '@/components/molecules/PsHorizontalDividerShort
 import imageTest from '@/images/aunction-img-test.png';
 import iconCandlestick from '@/images/icon-candlesticks.svg';
 import avatar from '@/images/aunction-avatar-test.png';
+import { AunctionsProps } from '@/contexts/all-aunctions';
 
 // styles
-const { secondBg, primaryText, highlight, firstBg } = theme;
+const { secondaryBg, primaryText, highlight, primaryBg } = theme;
 const { caption } = texts;
 
 const Container = styled.div`
@@ -23,7 +24,7 @@ const Container = styled.div`
   }
 `;
 const CardContainer = styled.div`
-  ${secondBg};
+  ${secondaryBg};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -33,14 +34,14 @@ const CardContainer = styled.div`
   border-radius: 2em;
 `;
 
-const ImageWrapper = styled.div`
+/* const ImageWrapper = styled.div`
   overflow: hidden;
   position: relative;
   height: 40vh;
   width: 100%;
   border-radius: 2em;
   margin-bottom: 1em;
-`;
+`; */
 
 const Content = styled.div`
   display: flex;
@@ -86,7 +87,7 @@ const AvatarImg = styled(Image)`
   border-radius: 2em;
   margin-left: -0.5em;
   z-index: 1;
-  border-color: ${firstBg.backgroundColor};
+  border-color: ${primaryBg.backgroundColor};
   border-width: 1.5px;
   border-style: solid;
 `;
@@ -107,48 +108,60 @@ const HighestBid = styled.p`
   padding-left: 0.5em;
 `;
 
-const PsNFTCard = () => {
+const ImageWrapper = styled(Image)`
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 2em;
+  margin-bottom: 2em;
+`;
+
+const PsNFTCard = ({ item }: AunctionsProps) => {
+  console.log(item);
   return (
     <Container>
       <CardContainer>
-        <ImageWrapper>
-          <Image
-            src={imageTest}
-            fill
-            style={{ objectFit: 'cover' }}
-            alt={'NFT Image'}
-          />
-        </ImageWrapper>
+        <Image
+          src={item.media.image}
+          style={{
+            objectFit: 'cover',
+            borderRadius: '2em',
+            paddingBottom: '1em',
+          }}
+          alt={'NFT Image'}
+          width={260}
+          height={360}
+        />
         <Content>
           <Separator>
             <ArtTitle>Amazing digital art</ArtTitle>
             <ArtPriceTag>
-              <ArtPrice>2.45 ETH</ArtPrice>
+              <ArtPrice>{item.instantPrice}</ArtPrice>
             </ArtPriceTag>
           </Separator>
           <Separator>
             <Avatars>
               <AvatarImg
-                src={avatar}
+                src={item.authorAvatar}
                 alt={'Creator picture'}
                 width={24}
                 height={24}
                 style={{ margin: 0 }}
               />
               <AvatarImg
-                src={avatar}
+                src={item.authorAvatar}
                 alt={'Creator picture'}
                 width={24}
                 height={24}
               />
               <AvatarImg
-                src={avatar}
+                src={item.authorAvatar}
                 alt={'Creator picture'}
                 width={24}
                 height={24}
               />
             </Avatars>
-            <Stock>3 in stock </Stock>
+            <Stock>{`${item.stock} in stock`}</Stock>
           </Separator>
         </Content>
         <PsHorizontalDivider />
@@ -163,7 +176,7 @@ const PsNFTCard = () => {
               />
               <Separator>
                 <BidText>Highest bid: </BidText>
-                <HighestBid>0.001 ETH</HighestBid>
+                <HighestBid>{item.highestBid}</HighestBid>
               </Separator>
             </Separator>
             <div>

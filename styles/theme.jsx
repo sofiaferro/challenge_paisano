@@ -14,14 +14,14 @@ const theme = {
   primaryText: { color: colorPalette.primaryText },
   secondaryText: { color: colorPalette.secondaryText },
   thirdText: { color: colorPalette.thirdText },
-  firstBg: { backgroundColor: colorPalette.mainBackground },
-  secondBg: { backgroundColor: colorPalette.secondaryBackground },
+  primaryBg: { backgroundColor: colorPalette.mainBackground },
+  secondaryBg: { backgroundColor: colorPalette.secondaryBackground },
   fourthText: { color: colorPalette.secondaryBackground },
   button: { backgroundColor: colorPalette.primaryButton },
   secondaryButton: { borderColor: colorPalette.thirdText },
+  thirdButton: { backgroundColor: colorPalette.secondaryButton },
   highlight: { color: colorPalette.mainHighlight },
   backgroundHighlight: { backgroundColor: colorPalette.mainHighlight },
-  thirdButton: { backgroundColor: colorPalette.secondaryButton },
 };
 
 export { theme };

@@ -5,10 +5,10 @@ import { theme } from '@/styles/theme';
 import PsNFTSideFilter from './dedicated/PsNFTSideFilter';
 
 // styles
-const { firstBg } = theme;
+const { primaryBg } = theme;
 
 const Container = styled.div`
-  ${firstBg};
+  ${primaryBg};
   padding: 2em;
   width: 100%;
   display: flex;
@@ -18,7 +18,6 @@ const Container = styled.div`
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  width: 80vw;
   position: relative;
   align-self: center;
   @media (max-width: 680px) {

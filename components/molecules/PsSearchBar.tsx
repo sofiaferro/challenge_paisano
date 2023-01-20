@@ -18,7 +18,7 @@ interface PsSearchBarProps {
 
 // styles
 const { button } = texts;
-const { secondaryButton, thirdText } = theme;
+const { secondaryButton, thirdText, primaryText } = theme;
 
 const SearchBar = styled.div`
   ${button};
@@ -44,6 +44,7 @@ const SearchBarContainer = styled.div`
 
 const CustomInput = styled.input`
   ${button};
+  ${primaryText};
   background-color: transparent;
   border-style: none;
   width: 100%;
