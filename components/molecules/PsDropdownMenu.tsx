@@ -17,6 +17,11 @@ interface PsDropdownMenuProps {
   defaultPlaceholder: string;
 }
 
+interface ItemProps {
+  text: string;
+  value: number;
+}
+
 // styles
 const { button } = texts;
 const { secondaryButton, thirdText, primaryBg } = theme;
@@ -147,7 +152,7 @@ const PsDropdownMenu = ({
 
   const [placeholder, setPlaceholder] = useState(defaultPlaceholder);
 
-  const handleOnChange = (item: { text: string; value: number }) => {
+  const handleOnChange = (item: ItemProps) => {
     setPlaceholder(item.text);
     tl.reverse();
     return onChange(item.value);
@@ -168,11 +173,11 @@ const PsDropdownMenu = ({
       <MobileNavMenu ref={listRef}>
         {options.map((item, i) => (
           <Item
-            value={item.value}
-            key={`key_menu_item_${i}_${item.text}`}
-            onClick={() => handleOnChange(item)}
+            value={(item as ItemProps).value}
+            key={`key_menu_item_${i}_${(item as ItemProps).text}`}
+            onClick={() => handleOnChange(item as ItemProps)}
           >
-            {item.text}
+            {(item as ItemProps).text}
           </Item>
         ))}
       </MobileNavMenu>

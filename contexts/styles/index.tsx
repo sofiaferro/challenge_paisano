@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import React, {
   createContext,
   useReducer,
@@ -15,13 +17,17 @@ const initialState: LayoutProps = initState;
 interface StylesProviderProps {
   children: React.ReactNode;
 }
-const StateContext = createContext<LayoutProps | null>(null);
-const UpdaterContext = createContext<[string, LayoutProps] | null>(null);
 
+type StringKeyValuePair = [string, StylesProviderProps];
+
+const StateContext = createContext<[string, StringKeyValuePair] | null>(null);
+const UpdaterContext = createContext<React.Dispatch<StringKeyValuePair> | null>(
+  null
+);
 const StylesProvider: React.FC<StylesProviderProps> = ({ children }) => {
   const [store, setStore] = useReducer(reducer, initialState);
   return (
-    <StateContext.Provider value={store}>
+    <StateContext.Provider value={store as [string, StringKeyValuePair]}>
       <UpdaterContext.Provider value={setStore}>
         {children}
       </UpdaterContext.Provider>

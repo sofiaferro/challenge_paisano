@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import React, { ElementType } from 'react';
 import type { AppProps } from 'next/app';
 

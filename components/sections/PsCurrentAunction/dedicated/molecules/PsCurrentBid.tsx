@@ -145,7 +145,7 @@ const PsCurrentBid = ({
   // format currency
   const highestBid = formatETHString(pop.highestBid);
   const rawUsd = formatRawUsd(prices.usd);
-  const conversion = formattedConversion(rawUsd * highestBid);
+  const conversion = formattedConversion(rawUsd * parseFloat(highestBid));
 
   return (
     <Container>

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import PsNFTCard from './PsNFTCard';
 import PsLoadButton from '@/components/molecules/PsLoadButton';
+import { AunctionsProps } from '@/contexts/all-aunctions';
 
 interface ItemProps {
   aunctions: object[];
@@ -27,13 +28,16 @@ const PsNFTList = ({ aunctions }: ItemProps) => {
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <Content>
         {Object.values(aunctions).map((item) => (
-          <CardWrapper key={`key_all_aunctions_${item.id}`}>
-            <PsNFTCard item={item} />
+          <CardWrapper key={`key_all_aunctions_${(item as AunctionsProps).id}`}>
+            <PsNFTCard item={item as AunctionsProps} />
           </CardWrapper>
         ))}
       </Content>
       <div style={{ alignSelf: 'center' }}>
-        <PsLoadButton title={'Load more'} />
+        <PsLoadButton
+          title={'Load more'}
+          onClick={() => console.log('Load more NFTs')}
+        />
       </div>
     </div>
   );

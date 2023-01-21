@@ -55,10 +55,10 @@ const PsNFTPriceSlider = ({ handlePriceFilter }: InputRangeProps) => {
   const [rangeval, setRangeval] = useState('5');
 
   // handlers
-  const handleChange = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     return setRangeval((e.target as HTMLInputElement).value);
   };
-  const handleOnFinish = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleOnFinish = (e: React.FormEvent<HTMLInputElement>) => {
     return handlePriceFilter((e.target as HTMLInputElement).value);
   };
 

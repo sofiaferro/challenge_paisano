@@ -106,7 +106,7 @@ const HighestBid = styled.p`
   padding-left: 0.5em;
 `;
 
-const PsNFTCard = ({ item }: AunctionsProps) => {
+const PsNFTCard = ({ item }: { item: AunctionsProps }) => {
   return (
     <Container>
       <CardContainer>

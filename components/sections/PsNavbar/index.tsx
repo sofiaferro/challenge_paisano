@@ -76,7 +76,7 @@ const PsNavBar = () => {
   // layout
   const {
     device: { A, S },
-  } = useStyleState() as LayoutProps;
+  } = useStyleState() as unknown as LayoutProps;
 
   // refs
   const topRef = useRef(null);

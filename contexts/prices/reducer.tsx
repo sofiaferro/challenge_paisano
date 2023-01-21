@@ -1,6 +1,6 @@
-import { pricesProps } from '.';
+import { PricesProps } from '.';
 
-type StringKeyValuePair = [string, pricesProps];
+type StringKeyValuePair = [string, PricesProps];
 
 const pricesReducer = (prices: object, action: StringKeyValuePair) => {
   const [name, payload] = action;

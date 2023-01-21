@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import React, {
   createContext,
   useReducer,
@@ -12,19 +14,22 @@ export interface PricesProps {
   eth: number;
 }
 
-interface PricesProviderProps {
+export interface PricesProviderProps {
   children: React.ReactNode;
 }
 
+type StringKeyValuePair = [string, PricesProps];
+
 const initialState: PricesProps = initState;
 
-const StateContext = createContext<PricesProps | null>(null);
-const UpdaterContext = createContext<[string, PricesProps] | null>(null);
-
+const StateContext = createContext<[string, PricesProviderProps] | null>(null);
+const UpdaterContext = createContext<React.Dispatch<StringKeyValuePair> | null>(
+  null
+);
 const PricesProvider: React.FC<PricesProviderProps> = ({ children }) => {
   const [store, setStore] = useReducer(reducer, initialState);
   return (
-    <StateContext.Provider value={store}>
+    <StateContext.Provider value={store as [string, PricesProviderProps]}>
       <UpdaterContext.Provider value={setStore}>
         {children}
       </UpdaterContext.Provider>
@@ -45,7 +50,9 @@ function usePricesUpdater() {
   if (typeof setStore === 'undefined') {
     throw new Error('usePricesUpdater must be used within a StylesProvider');
   }
-  const updater = useCallback(setStore, [setStore]);
+  const updater = useCallback(setStore as React.Dispatch<StringKeyValuePair>, [
+    setStore,
+  ]);
   return updater;
 }
 

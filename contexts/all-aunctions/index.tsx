@@ -31,15 +31,19 @@ interface AunctionsProviderProps {
   children: React.ReactNode;
 }
 
+type StringKeyValuePair = [string, AunctionsProps];
+
 const initialState = initState;
 
 const StateContext = createContext<[string, AunctionsProps] | null>(null);
-const UpdaterContext = createContext<[string, AunctionsProps] | null>(null);
+const UpdaterContext = createContext<React.Dispatch<StringKeyValuePair> | null>(
+  null
+);
 
 const AunctionsProvider: React.FC<AunctionsProviderProps> = ({ children }) => {
   const [store, setStore] = useReducer(reducer, initialState);
   return (
-    <StateContext.Provider value={store}>
+    <StateContext.Provider value={store as [string, AunctionsProps]}>
       <UpdaterContext.Provider value={setStore}>
         {children}
       </UpdaterContext.Provider>
@@ -64,7 +68,9 @@ function useAunctionsUpdater() {
       'useAunctionsUpdater must be used within a AunctionsProvider'
     );
   }
-  const updater = useCallback(setStore, [setStore]);
+  const updater = useCallback(setStore as React.Dispatch<StringKeyValuePair>, [
+    setStore,
+  ]);
   return updater;
 }
 

@@ -96,7 +96,7 @@ const PsNFTFilter = () => {
           handleResetFilter={handleResetFilter}
           handlePriceFilter={handlePriceFilter}
         />
-        <PsNFTList aunctions={filteredData} />
+        <PsNFTList aunctions={filteredData as AunctionsProps[]} />
       </Content>
     </Container>
   );

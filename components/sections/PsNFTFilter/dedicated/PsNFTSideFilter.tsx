@@ -56,14 +56,14 @@ const PsNFTSideFilter = ({
   // sort by options
   const likes = [
     { text: 'Most liked', value: 1 },
-    { text: 'Least liked', value: 1 },
+    { text: 'Least liked', value: 2 },
   ];
 
   const colors = [
     { text: 'All colors', value: 1 },
-    { text: 'Green', value: 1 },
-    { text: 'Pink', value: 1 },
-    { text: 'Purple', value: 1 },
+    { text: 'Green', value: 2 },
+    { text: 'Pink', value: 3 },
+    { text: 'Purple', value: 4 },
   ];
 
   return (

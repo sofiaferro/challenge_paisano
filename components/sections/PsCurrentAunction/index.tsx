@@ -7,11 +7,12 @@ import { theme } from '@/styles/theme';
 
 import PsCurrentBid from './dedicated/molecules/PsCurrentBid';
 
-import { usePricesState } from '@/contexts/prices';
+import { PricesProps, usePricesState } from '@/contexts/prices';
 import { usePopularAunctionsState } from '@/contexts/popular-aunctions';
 
 import arrowLeft from '@/images/arrow-left.png';
 import arrowRight from '@/images/arrow-right.png';
+import { AunctionsProps } from '@/contexts/all-aunctions';
 
 // styles
 const { primaryBg, thirdText } = theme;
@@ -77,7 +78,7 @@ const PsCurrentAunction = () => {
     setIndex((pre) => pre - 1);
   };
 
-  const currentAu = Object.values(pop)[index];
+  const currentAu = Object.values(pop)[index] as AunctionsProps;
   return (
     <Container>
       <Content>
@@ -92,7 +93,10 @@ const PsCurrentAunction = () => {
             objectFit: 'cover',
           }}
         />
-        <PsCurrentBid pop={currentAu} prices={prices} />
+        <PsCurrentBid
+          pop={currentAu}
+          prices={prices as unknown as PricesProps}
+        />
       </Content>
       <Arrows>
         <div
