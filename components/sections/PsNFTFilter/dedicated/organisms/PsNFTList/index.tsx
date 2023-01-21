@@ -4,6 +4,11 @@ import styled from 'styled-components';
 import PsNFTCard from './PsNFTCard';
 import PsLoadButton from '@/components/molecules/PsLoadButton';
 
+interface ItemProps {
+  aunctions: object[];
+}
+
+// styles
 const CardWrapper = styled.div``;
 
 const Content = styled.div`
@@ -17,7 +22,7 @@ const Content = styled.div`
   padding-bottom: 2em;
 `;
 
-const PsNFTList = ({ aunctions }) => {
+const PsNFTList = ({ aunctions }: ItemProps) => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <Content>

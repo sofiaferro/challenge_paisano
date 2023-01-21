@@ -14,7 +14,8 @@ import iconCross from '@/images/icon-cross.svg';
 import PsHorizontalDivider from '@/components/molecules/PsHorizontalDividerShort';
 
 interface SideFilterProps {
-  resetFilter: () => void;
+  handleResetFilter: () => void;
+  handlePriceFilter: (eth: string) => void;
 }
 
 // styles
@@ -48,8 +49,11 @@ const ResetFilterContainer = styled.div`
   padding-bottom: 2em;
 `;
 
-const PsNFTSideFilter = ({ resetFilter }: SideFilterProps) => {
-  // filter options
+const PsNFTSideFilter = ({
+  handleResetFilter,
+  handlePriceFilter,
+}: SideFilterProps) => {
+  // sort by options
   const likes = [
     { text: 'Most liked', value: 1 },
     { text: 'Least liked', value: 1 },
@@ -64,7 +68,7 @@ const PsNFTSideFilter = ({ resetFilter }: SideFilterProps) => {
 
   return (
     <Container>
-      <PsNFTPriceSlider />
+      <PsNFTPriceSlider handlePriceFilter={handlePriceFilter} />
       <PsHorizontalDivider />
       <div>
         <Caption>Likes</Caption>
@@ -83,7 +87,7 @@ const PsNFTSideFilter = ({ resetFilter }: SideFilterProps) => {
         />
       </div>
       <PsHorizontalDivider />
-      <ResetFilterContainer onClick={resetFilter}>
+      <ResetFilterContainer onClick={handleResetFilter}>
         <Image src={iconCross} width={16} height={16} alt={'Cross icon'} />
         <ResetFilter>Reset filter</ResetFilter>
       </ResetFilterContainer>

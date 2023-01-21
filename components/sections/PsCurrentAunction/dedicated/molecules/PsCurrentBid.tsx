@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 import {
   formatEndDate,
-  formatHighestBid,
+  formatETHString,
   formatRawUsd,
   formattedConversion,
 } from '@/helpers';
@@ -143,7 +143,7 @@ const PsCurrentBid = ({
   const endsAt = formatEndDate(pop.endsAt);
 
   // format currency
-  const highestBid = formatHighestBid(pop.highestBid);
+  const highestBid = formatETHString(pop.highestBid);
   const rawUsd = formatRawUsd(prices.usd);
   const conversion = formattedConversion(rawUsd * highestBid);
 

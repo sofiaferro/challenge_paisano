@@ -22,11 +22,11 @@ export default function Home({ pageProps }: AppProps) {
 
   // all aunctions
   const aunctionsUpdater = useAunctionsUpdater();
-  aunctionsUpdater(['UPDATE_AUCTIONS', aunctionsData]);
+  aunctionsUpdater(['UPDATE_AUNCTIONS', aunctionsData]);
 
   // popular aunctions
   const popularAunctionsUpdater = usePopularAunctionsUpdater();
-  popularAunctionsUpdater(['UPDATE_POPULAR_AUCTIONS', popularAunctionsData]);
+  popularAunctionsUpdater(['UPDATE_POPULAR_AUNCTIONS', popularAunctionsData]);
 
   return (
     <div>
@@ -45,6 +45,7 @@ export async function getServerSideProps() {
     `${process.env.BASE_URL}/nfpaisanos/eth-price`,
     {
       headers: {
+        'Cache-Control': 'public, s-maxage=10, stale-while-revalidate=59',
         apiKey: `${process.env.API_KEY}`,
         'Access-Control-Allow-Origin': '*',
         mode: 'no-cors',
@@ -59,6 +60,7 @@ export async function getServerSideProps() {
     {
       headers: {
         apiKey: `${process.env.API_KEY}`,
+        'Cache-Control': 'public, s-maxage=10, stale-while-revalidate=59',
         'Access-Control-Allow-Origin': '*',
         mode: 'no-cors',
       },
@@ -73,6 +75,7 @@ export async function getServerSideProps() {
       headers: {
         apiKey: `${process.env.API_KEY}`,
         'Access-Control-Allow-Origin': '*',
+        'Cache-Control': 'public, s-maxage=10, stale-while-revalidate=59',
         mode: 'no-cors',
       },
     }

@@ -9,10 +9,10 @@ export const formatEndDate = (endDate: string) => {
   return { month, day, year };
 };
 
-export const formatHighestBid = (highestBid: string) => {
-  return highestBid
+export const formatETHString = (string: string) => {
+  return string
     .replace('.', ',')
-    .substring(0, highestBid.length - 4)
+    .substring(0, string.length - 4)
     .replace(',', '.');
 };
 
@@ -24,18 +24,27 @@ export const formattedConversion = (conv: number) => {
   return parseFloat(conv.toString()).toFixed(2);
 };
 
-export const sortById = (list) => {
-  return list.sort((a, b) => (moment(a.id).isSameOrAfter(b.id) ? 1 : -1));
+export const sortById = (list: object[]) => {
+  return list.sort((a, b) => a.id - b.id);
 };
 
-export const sortNewestFirst = (list) => {
-  return list.sort((a, b) =>
-    moment(a.createdAt).isSameOrAfter(b.createdAt) ? 1 : -1
-  );
+export const sortNewestFirst = (list: object[]) => {
+  return list.sort((a, b) => {
+    return moment(a.createdAt).isSameOrAfter(b.createdAt) ? 1 : -1;
+  });
 };
 
-export const sortOldestFirst = (list) => {
+export const sortOldestFirst = (list: object[]) => {
   return list.sort((a, b) =>
     moment(a.createdAt).isSameOrBefore(b.createdAt) ? 1 : -1
   );
+};
+
+export const filterByPrice = (list: object[], value: string) => {
+  const cheaperThan = (item: object) => {
+    const formattedPrice = formatETHString(item.instantPrice);
+    return parseFloat(formattedPrice) <= parseFloat(value);
+  };
+  const filteredList = list.filter(cheaperThan);
+  return filteredList;
 };

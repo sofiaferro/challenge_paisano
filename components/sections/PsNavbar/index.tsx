@@ -58,9 +58,9 @@ const ToggleContainer = styled.div`
 `;
 
 const DesktopNavMenu = styled.div`
-  display: flex;
   flex-direction: row;
   align-items: center;
+  display: flex;
 `;
 
 const LogoContainer = styled.div`

@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { theme } from '@/styles/theme';
 
-import { useAunctionsState } from '@/contexts/all-aunctions';
-import { useAunctionsUpdater } from '@/contexts/all-aunctions';
-import { sortById, sortNewestFirst, sortOldestFirst } from '@/helpers';
+import { AunctionsProps, useAunctionsState } from '@/contexts/all-aunctions';
+import {
+  filterByPrice,
+  sortById,
+  sortNewestFirst,
+  sortOldestFirst,
+} from '@/helpers';
 
 import PsNFTMainFilter from './dedicated/PsNFTMainFilter';
 import PsNFTSideFilter from './dedicated/PsNFTSideFilter';
@@ -38,7 +42,8 @@ const Content = styled.div`
 const PsNFTFilter = () => {
   // states
   const aunctions = useAunctionsState();
-  const updater = useAunctionsUpdater();
+
+  const [filteredData, setFilteredData] = useState(aunctions);
 
   // newest / oldest date filter
   const addedDate = [
@@ -46,20 +51,38 @@ const PsNFTFilter = () => {
     { text: 'Oldest', value: 2 },
   ];
 
+  // set data
+  useEffect(() => {
+    return (() => setFilteredData(aunctions))();
+  }, [aunctions]);
+
+  // filter handlers
   const handleDateFilter = (val: number | string) => {
-    const list = Object.values(aunctions);
+    const list = Object.values(aunctions as object[]);
     let sortedList;
     if (val === 1) {
       sortedList = sortNewestFirst(list);
     } else if (val === 2) {
       sortedList = sortOldestFirst(list);
     }
-    return updater(['UPDATE_AUCTIONS', sortedList]);
+    return setFilteredData(
+      sortedList as React.SetStateAction<[string, AunctionsProps] | null>
+    );
   };
 
   const handleResetFilter = () => {
-    const sortedList = sortById(Object.values(aunctions));
-    return updater(['UPDATE_AUCTIONS', sortedList]);
+    const sortedList = sortById(Object.values(aunctions as object[]));
+    return setFilteredData(
+      sortedList as React.SetStateAction<[string, AunctionsProps] | null>
+    );
+  };
+
+  const handlePriceFilter = (eth: string) => {
+    const list = Object.values(aunctions as object[]);
+    const filteredList = filterByPrice(list, eth);
+    return setFilteredData(
+      filteredList as React.SetStateAction<[string, AunctionsProps] | null>
+    );
   };
 
   return (
@@ -69,8 +92,11 @@ const PsNFTFilter = () => {
         handleDateFilter={handleDateFilter}
       />
       <Content>
-        <PsNFTSideFilter resetFilter={handleResetFilter} />
-        <PsNFTList aunctions={aunctions} />
+        <PsNFTSideFilter
+          handleResetFilter={handleResetFilter}
+          handlePriceFilter={handlePriceFilter}
+        />
+        <PsNFTList aunctions={filteredData} />
       </Content>
     </Container>
   );

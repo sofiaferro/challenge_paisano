@@ -1,4 +1,4 @@
-import React, { createRef, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import gsap, { Power2 } from 'gsap';
 import styled from 'styled-components';

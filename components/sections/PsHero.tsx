@@ -33,6 +33,8 @@ const Container = styled.div`
 const Content = styled.div`
   top: 50px;
   position: relative;
+  display: flex;
+  flex-direction: column;
   align-items: center;
 `;
 

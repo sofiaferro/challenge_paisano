@@ -7,7 +7,7 @@ import PsDropdownMenu from '@/components/molecules/PsDropdownMenu';
 import PsNFTCategoryFilter from './organisms/PsNFTCategoryFilter';
 
 interface MainFilterProps {
-  dateFilterOptions: Array<{}>;
+  dateFilterOptions: Array<object>;
   handleDateFilter: (val: number | string) => void;
 }
 
