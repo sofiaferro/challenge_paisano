@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PsButton renders the component 1`] = `
+<div
+  className="sc-21b4ebd5-1 gPuGRa"
+  style={{}}
+>
+  <div
+    className="sc-21b4ebd5-0 lmlyrg"
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={{}}
+  >
+    <p>
+      test button
+    </p>
+  </div>
+</div>
+`;

@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PsFooter renders the component 1`] = `
+<div
+  className="sc-6b502cdb-0 fdAMRV"
+>
+  <div
+    className="sc-6b502cdb-1 dDBJSW"
+  >
+    <img
+      alt="NFTPaisanos logo"
+      data-nimg="1"
+      decoding="async"
+      height={40}
+      loading="lazy"
+      onError={[Function]}
+      onLoad={[Function]}
+      src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+      srcSet="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+      style={
+        {
+          "color": "transparent",
+        }
+      }
+      width={40}
+    />
+  </div>
+  <p
+    className="sc-6b502cdb-2 loeXDe"
+  >
+    The New Creative Economy.
+  </p>
+  <div
+    className="sc-e5ce1a5b-0 kzTqjN"
+  >
+    <img
+      alt="Horizontal divider"
+      data-nimg="1"
+      decoding="async"
+      height={40}
+      loading="lazy"
+      onError={[Function]}
+      onLoad={[Function]}
+      src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+      srcSet="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+      style={
+        {
+          "color": "transparent",
+        }
+      }
+      width={40}
+    />
+  </div>
+  <p
+    className="sc-6b502cdb-3 dkXOCx"
+  >
+    Created with ❤ by sofi 👩‍💻👾
+  </p>
+</div>
+`;

@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PsDropdownMenu renders the component 1`] = `
+<div
+  className="sc-4b7d43a0-1 eppnxi"
+>
+  <div
+    className="sc-4b7d43a0-0 hwmByI"
+    onClick={[Function]}
+    style={{}}
+  >
+    <p>
+      test placeholder
+    </p>
+    <div
+      className="sc-4b7d43a0-2 grEoUH"
+    >
+      <img
+        alt="Icon chevron bar"
+        data-nimg="1"
+        decoding="async"
+        height={40}
+        loading="lazy"
+        onError={[Function]}
+        onLoad={[Function]}
+        src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+        srcSet="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+        style={
+          {
+            "color": "transparent",
+          }
+        }
+        width={40}
+      />
+    </div>
+  </div>
+  <ul
+    className="sc-4b7d43a0-3 heKFHF"
+  >
+    <li
+      className="sc-4b7d43a0-4 bIdavV"
+      onClick={[Function]}
+      value={1}
+    >
+      opt 1
+    </li>
+    <li
+      className="sc-4b7d43a0-4 bIdavV"
+      onClick={[Function]}
+      value={2}
+    >
+      opt 2
+    </li>
+    <li
+      className="sc-4b7d43a0-4 bIdavV"
+      onClick={[Function]}
+      value={3}
+    >
+      opt 3
+    </li>
+  </ul>
+</div>
+`;

@@ -45,6 +45,9 @@ const DropdownMenuContainer = styled.div`
   flex-direction: column;
   position: relative;
   width: 311px;
+  @media (max-width: 680px) {
+    width: 100%;
+  }
 `;
 const ImageWrapper = styled.div`
   ${thirdText};

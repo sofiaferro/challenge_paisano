@@ -84,11 +84,12 @@ const PsCurrentAunction = () => {
         <Image
           src={currentAu.media.image}
           alt={'Main aunction image'}
-          width={300}
-          height={500}
+          width={350}
+          height={551}
           style={{
             borderRadius: '2em',
             paddingBottom: '1em',
+            objectFit: 'cover',
           }}
         />
         <PsCurrentBid pop={currentAu} prices={prices} />

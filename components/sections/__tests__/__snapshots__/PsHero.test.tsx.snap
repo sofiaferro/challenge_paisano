@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PsHero renders the component 1`] = `
+<div
+  className="sc-25d04c34-0 ipzWyM"
+>
+  <div
+    className="sc-25d04c34-1 QXRnW"
+  >
+    <p
+      className="sc-25d04c34-3 koPsWP"
+    >
+      Create, explore, & SELL digital art NFTs.
+    </p>
+    <h3
+      className="sc-25d04c34-2 iqLTwI"
+    >
+      The new creative economy.
+    </h3>
+    <div
+      className="sc-21b4ebd5-1 gPuGRa"
+      style={{}}
+    >
+      <div
+        className="sc-21b4ebd5-0 lmlyrg"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={{}}
+      >
+        <p>
+          Explore
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
