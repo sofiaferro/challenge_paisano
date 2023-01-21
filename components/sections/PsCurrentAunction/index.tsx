@@ -85,8 +85,8 @@ const PsCurrentAunction = () => {
         <Image
           src={currentAu.media.image}
           alt={'Main aunction image'}
-          width={350}
-          height={551}
+          width={311}
+          height={511}
           style={{
             borderRadius: '2em',
             paddingBottom: '1em',

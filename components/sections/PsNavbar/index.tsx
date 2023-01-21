@@ -21,6 +21,14 @@ import logo from '@/images/logo.png';
 // styles
 const { primaryBg } = theme;
 
+const Content = styled.div`
+  padding: 2em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100vw;
+`;
+
 const Navbar = styled.nav`
   ${primaryBg};
   width: 100%;
@@ -28,7 +36,6 @@ const Navbar = styled.nav`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 2em;
   z-index: 3;
   position: fixed;
   padding-bottom: 2em;
@@ -167,8 +174,8 @@ const PsNavBar = () => {
   };
 
   return (
-    <div>
-      <Navbar>
+    <Navbar>
+      <Content>
         <LogoContainer>
           <div onClick={() => router.push('/')}>
             <Image src={logo} alt='NFTPaisanos logo' />
@@ -201,21 +208,21 @@ const PsNavBar = () => {
             }
           />
         )}
-        {(A || S) && (
-          <MobileNavMenu ref={menuRef}>
-            {mobileMenuItems.map((item, i) => (
-              <PsNavbarItem
-                item={item}
-                key={`key_menu_item_${i}_${item.href}`}
-                onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) =>
-                  handlePushPage(e, item.href)
-                }
-              />
-            ))}
-          </MobileNavMenu>
-        )}
-      </Navbar>
-    </div>
+      </Content>
+      {(A || S) && (
+        <MobileNavMenu ref={menuRef}>
+          {mobileMenuItems.map((item, i) => (
+            <PsNavbarItem
+              item={item}
+              key={`key_menu_item_${i}_${item.href}`}
+              onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) =>
+                handlePushPage(e, item.href)
+              }
+            />
+          ))}
+        </MobileNavMenu>
+      )}
+    </Navbar>
   );
 };
 
