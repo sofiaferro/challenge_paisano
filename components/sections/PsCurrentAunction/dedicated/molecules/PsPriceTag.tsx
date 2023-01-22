@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { theme } from '@/styles/theme';
 import texts from '@/styles/texts';
 
-import shape from '@/images/aunction-shape-test.png';
+import shape from '@/images/aunction-shape.png';
 
 // styles
 const { backgroundHighlight } = theme;
