@@ -32,7 +32,7 @@ const Content = styled.div`
 const Navbar = styled.nav`
   ${primaryBg};
   width: 100%;
-  height: '81px';
+  height: 81px;
   display: flex;
   flex-direction: row;
   align-items: center;
